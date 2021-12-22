@@ -1,11 +1,25 @@
 <?php
-$n = 953;
+$n = readline('Enter a Number: ');
 $temp = $n;
-$rev = 0;
-while($n>0)
+// Class to perform Reverse of a number operation
+class Reverse
 {
-	$r = $n%10;
-	$rev = ($rev*10)+$r;
-	$n = floor($n/10);
+	/**
+	 * Function to get Reverse of a Number
+	 * Passing temp as parameter which has the number
+	 * Returns the reverse of the number
+	 */
+	function reverse($temp)
+	{
+		$rev = 0;
+		while ($temp > 0) {
+			$r = $temp % 10;
+			$rev = ($rev * 10) + $r;
+			$temp = floor($temp / 10);
+		}
+		return $rev;
+	}
 }
-echo "The Reverse of the Number ".$temp." is: ".$rev;
+// Class object and calling function using object
+$obj = new Reverse();
+echo "The Reverse of the Number " . $n . " is: " . $obj->reverse($temp);

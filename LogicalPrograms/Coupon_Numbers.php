@@ -1,41 +1,48 @@
 <?php
-$couponCount=0;
-$randomCount=0;
-$j=0;
-$n = 10;
-$distinctArray =new SplFixedArray($n);
-while(($couponCount<=$n) && ($j<$n))
+// Class for generating Coupon Numbers
+class Coupon_Number
 {
-	$flag=0;
-	$randomCoupon = rand(1, 10);
-	echo "Random is:".$randomCoupon."\n";
-	$randomCount=$randomCount+1;
-	for($i=0; $i<$n; $i++)
+	/**
+	 * Function to generate the random numbers and
+	 * storing the Unique coupons into the array
+	 * Passing the parameters of Number of Coupons and the Array
+	 * Returns the count of Randoms generated
+	 */
+	function coupons($n, $distinctArray)
 	{
-		if($distinctArray[$i]==$randomCoupon)
-		{
-    		$flag=$flag+1;
-			//System.out.println("Flag: "+flag);
-			break;
+		$couponCount = 0;
+		$randomCount = 0;
+		$j = 0;
+		while (($couponCount <= $n) && ($j < $n)) {
+			$flag = 0;
+			$randomCoupon = rand(1, 10);
+			//echo "Random is:" . $randomCoupon . "\n";
+			$randomCount = $randomCount + 1;
+			for ($i = 0; $i < $n; $i++) {
+				if ($distinctArray[$i] == $randomCoupon) {
+					$flag = $flag + 1;
+					break;
+				} else {
+					$flag = $flag;
+				}
+			}
+			if ($flag == 0) {
+				$distinctArray[$j] = $randomCoupon;
+				echo "Added Coupon is: " . $distinctArray[$j] . "\n";
+				$j++;
+				$couponCount += 1;
+				//echo "Coupon Count is : " . $couponCount . "\n";
+			}
 		}
-		else
-		{
-			$flag=$flag;
-			//System.out.println("Flag: "+flag);
-		}
-	}
-	if($flag==0)
-	{
-		$distinctArray[$j]=$randomCoupon;
-		echo "Added Coupon is: ".$distinctArray[$j]."\n";
-		$j++;
-		$couponCount=$couponCount+1;
-		echo "Coupon Count is : ".$couponCount."\n";
+		return $randomCount;
 	}
 }
-echo "No.of Randoms Generated: ".$randomCount."\n";
+$n = readline('Enter Number of Coupons Needed: ');
+$distinctArray = new SplFixedArray($n);
+// Class object and calling function using object
+$obj = new Coupon_Number();
+echo "No.of Randoms Generated: " . $obj->coupons($n, $distinctArray) . "\n";
 echo "Distinct Coupons: \n";
-for($k=0; $k<$n; $k++)
-{
-	echo $distinctArray[$k]." ";
+for ($k = 0; $k < $n; $k++) {
+	echo $distinctArray[$k] . " ";
 }
